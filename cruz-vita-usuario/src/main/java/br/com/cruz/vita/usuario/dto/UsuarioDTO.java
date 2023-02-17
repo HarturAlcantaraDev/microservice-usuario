@@ -22,6 +22,4 @@ public class UsuarioDTO {
 	@NotBlank(message = "Este campo é obrigatório!")
 	private String cpf;
 	
-	
-
 }

@@ -1,5 +1,6 @@
 package br.com.cruz.vita.usuario.model;
 
+
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -11,8 +12,6 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-
-import org.hibernate.validator.constraints.br.CPF;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,7 +38,6 @@ public class UsuarioModel {
 	private String senha;
 	
 	@NotBlank(message = "Este campo é obrigatório!")
-	@CPF
 	private String cpf; 
 
 	@Column(name = "tentativa_login")
@@ -60,5 +58,9 @@ public class UsuarioModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pessoa")
 	private Long idPessoa;
+	
+	
+	
+	
 
 }
