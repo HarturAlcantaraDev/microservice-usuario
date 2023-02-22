@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cruz.vita.usuario.dto.ResponseUsuarioDTO;
 import br.com.cruz.vita.usuario.dto.UsuarioDTO;
+import br.com.cruz.vita.usuario.service.CriptografiaService;
 import br.com.cruz.vita.usuario.service.UsuarioService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,7 +36,7 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioService usuarioService;
-	
+
 	@Value("${ambiente.deploy}")
 	private String profile;
 
@@ -60,11 +61,12 @@ public class UsuarioController {
 	@GetMapping("/buscar/{email}")
 	public ResponseEntity<String> buscarPorEmail(@PathVariable @Valid String email) {
 		infoAmbiente();
+
 		return ResponseEntity.status(HttpStatus.OK).body(usuarioService.buscarPorEmail(email));
 	}
 
 	@PostMapping("/cadastrar")
-	public ResponseEntity<String> criarUsuario(@RequestBody @Valid  UsuarioDTO usuario) {
+	public ResponseEntity<String> criarUsuario(@RequestBody @Valid UsuarioDTO usuario) {
 		infoAmbiente();
 		return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.cadastrarUsuario(usuario));
 	}
@@ -92,7 +94,7 @@ public class UsuarioController {
 		infoAmbiente();
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuarioService.deletarPorEmail(email));
 	}
-	
+
 	public void infoAmbiente() {
 		log.info("O ambiente é: " + profile);
 	}

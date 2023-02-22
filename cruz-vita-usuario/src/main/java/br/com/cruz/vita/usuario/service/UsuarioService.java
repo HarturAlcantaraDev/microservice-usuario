@@ -33,6 +33,9 @@ public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private CriptografiaService cryptoService;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -84,6 +87,8 @@ public class UsuarioService {
 			UsuarioModel usuarioNovo = modelMapper.map(usuario, UsuarioModel.class);
 			usuarioNovo.setDataInclusao(LocalDateTime.now());
 			usuarioNovo.setCpf(formatarCpf(usuario.getCpf()));
+			String hashedPassword = cryptoService.encryPassaword(usuario.getSenha());
+			usuarioNovo.setSenha(hashedPassword);
 			usuarioRepository.save(usuarioNovo);
 			
 			return "usuário criado com sucesso!";
@@ -107,6 +112,8 @@ public class UsuarioService {
 					UsuarioModel usuarioModel = modelMapper.map(itemLista, UsuarioModel.class);
 					usuarioModel.setDataInclusao(LocalDateTime.now());
 					usuarioModel.setCpf(formatarCpf(itemLista.getCpf()));
+					String hashedPassword = cryptoService.encryPassaword(itemLista.getSenha());
+					usuarioModel.setSenha(hashedPassword);
 					usuarioRepository.save(usuarioModel);
 				
 				} else {

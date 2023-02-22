@@ -1,9 +1,9 @@
 server:
-  port: 8881
+  port: 8080
 
 spring:
   application:
-    name: 'cruz-vita-usuario'
+    name: 'cruz-vita-usuario-criptografia'
   profiles:
     active: prod
   cloud:
